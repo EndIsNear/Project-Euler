@@ -1,0 +1,27 @@
+//Find the sum of all the primes below two million.
+
+
+#include <iostream>
+using namespace std;
+
+bool isItPrime ( int x )
+{
+    for( int del = 3 , result = 1 ; del * del <= x ; del += 2 )
+        if ( x % del == 0 )
+            return false;
+    return true;
+}
+
+int main()
+{
+    int num=15;
+    unsigned long long int sum=41;
+    while( num < 2000000 )
+    {
+        if ( isItPrime ( num ) == true )
+            sum += num;
+        num+=2;
+    }
+    cout << sum;
+    return 0;
+}
