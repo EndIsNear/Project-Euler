@@ -1,0 +1,26 @@
+//Find the largest palindrome made from the product of two 3-digit numbers.
+
+
+#include <iostream>
+using namespace std;
+
+bool isItPalindrom ( int x )
+{
+    int revursed , y = x;
+    for ( revursed = 0 ; y > 0 ; y = y /10 )
+        revursed = 10 * revursed + y % 10;
+    return x == revursed ? true : false;
+}
+
+int main ()
+{
+    int x1 , x2;
+    for( x1 = 999 ; x1 >= 800 ; x1-- )
+        for( x2 = 999 ; x2 >= 800 ; x2-- )
+            if( isItPalindrom ( x1 * x2 ) == 1 )
+            {
+                cout<<x1<<"   "<<x2<<"   "<<x1*x2<<endl;
+                return 0;
+            }
+    return 0;
+}
