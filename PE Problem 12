@@ -1,0 +1,37 @@
+// What is the value of the first triangle number to have over five hundred divisors?
+
+
+#include <iostream>
+using namespace std;
+
+int cntDivisors ( unsigned long long int x )
+{
+    int divisors = 1;
+    for ( unsigned crnDivisor = 2 ; 1 ; crnDivisor != 2 ? crnDivisor += 2 : ++crnDivisor )
+    {
+        int i = 0;
+        while ( x % crnDivisor == 0 )
+        {
+            x /= crnDivisor;
+            ++i;
+        }
+
+        divisors *= ++i;
+        if ( x == 1 )
+            break;
+    }
+    return divisors;
+}
+
+int main()
+{
+    unsigned long long int sum = 0;
+    for ( unsigned i = 1 ; 1 ; i++ )
+    {
+        sum += i;
+        if ( cntDivisors( sum ) > 500 )
+            break;
+    }
+    cout << sum;
+    return 0;
+}
