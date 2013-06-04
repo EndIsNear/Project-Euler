@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+bool isItPrime ( int a )
+{
+    for( int del = 3 , result = 1 ; del * del <= a ; del += 2 )
+    {
+        result = a % del;
+        if( result == 0 )
+            return 0;
+    }
+    return 1;
+}
+
+int main()
+{
+    int num = 15;
+    int counter = 6;
+    for(; counter <= 10000 ; num += 2 )
+        if ( isItPrime(num) == true )
+            counter++;
+    cout << num-2;
+    return 0;
+}
