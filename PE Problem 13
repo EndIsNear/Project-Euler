@@ -1,0 +1,71 @@
+// Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
+
+
+#include <iostream>
+using namespace std;
+
+const short int MAX = 55;
+
+class LongNum
+{
+public:
+    LongNum ( const char* );
+    void Print () const { for ( int i = 0 ; i < MAX ; i++ ) cout << this->num[i]; cout << endl; }
+    void PrintFirstTen () const;
+    LongNum operator+ ( const LongNum& ) const;
+private:
+    char num[MAX];
+};
+
+LongNum::LongNum ( const char* num )
+{
+    int lenght = 0;
+    const char* pnt = num;
+    while ( *pnt )
+    {
+        ++lenght;
+        ++pnt;
+    }
+    for ( int i = 0 ; i < MAX - lenght ; i++ )
+        this->num[i] = '0' ;
+
+    for ( int i = MAX - lenght ; i < MAX ; i++ )
+        this->num[i] = num[i - ( MAX - lenght )];
+}
+
+void LongNum::PrintFirstTen() const
+{
+    int i = 0;
+    for (; i < MAX ; i++ )
+        if ( this->num[i] != '0' )
+            break;
+    for( int j = i ; j < 10 + i && j < MAX ; j++ )
+        cout << this->num[j];
+    cout << endl;
+}
+LongNum LongNum::operator+ ( const LongNum& num2 ) const
+{
+    char tmp[MAX];
+    bool tmpDigit = false;
+    for ( int i = MAX - 1 ; i >= 0 ; --i )
+    {
+        tmp[i] = tmpDigit ? ( this->num[i] + num2.num[i] - '0' + 1 ) : ( this->num[i] + num2.num[i] - '0' ) ;
+        tmpDigit = false;
+        if ( tmp[i] - '0' > 9 )
+        {
+            tmpDigit = true;
+            tmp[i] -= 10;
+        }
+    }
+
+    return LongNum ( tmp );
+}
+int main ()
+{
+    LongNum num ( "11112" );
+    LongNum num2 ( "111119" );
+    num = num + num2;
+    num.Print();
+    num.PrintFirstTen();
+    return 0;
+}
