@@ -1,0 +1,19 @@
+//By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
+
+
+#include <iostream>
+using namespace std;
+
+int main ()
+{
+    unsigned a = 1 , b = 2 , sum = 0;
+    while ( a < 4000000 || b < 4000000 )
+    {
+        sum = a % 2 ? sum : sum + a;
+        sum = b % 2 ? sum : sum + b;
+        a +=b;
+        b+=a;
+    }
+    cout << sum;
+    return 0;
+}
