@@ -1,0 +1,33 @@
+//What is the largest prime factor of the number 600851475143 ?
+
+
+#include <iostream>
+using namespace std;
+
+bool isItPrime ( int a )
+{
+    for( int del = 3 , result = 1 ; del * del <= a ; del += 2 )
+    {
+        result = a % del;
+        if( result == 0 )
+            return 0;
+    }
+    return 1;
+}
+
+int main ()
+{
+    int MAX = 0;
+    unsigned long long int num = 600851475143;
+    for ( int i = 1 ; i <= num ; ++i )
+    {
+        if ( 600851475143 % i == 0 )
+        {
+            num /= i;
+            if ( isItPrime ( i ) )
+                MAX = i;
+        }
+    }
+    cout << MAX;
+    return 0;
+}
