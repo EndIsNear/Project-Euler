@@ -1,0 +1,90 @@
+//If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?
+
+
+#include <iostream>
+using namespace std;
+//one , two , three , four , five , six , seven , eight , nine
+const short int DIGGITS[] = { 0 , 3 , 3 , 5 , 4 , 4 , 3 , 5 , 5 , 4 };
+int cntLetters ( int x )
+{
+    int cnt = 0;
+    if ( x < 1 || x > 1000 )
+        return 0;
+    if ( x == 1000 )
+        return 11;
+
+    if ( x >= 100 )
+    {
+        cnt += ( DIGGITS[ x / 100 ] + 7 );
+        x %= 100;
+        if ( x != 0 )
+            cnt += 3; // and
+    }
+    if ( x > 19 )
+    {
+        switch ( x / 10 )
+        {
+        case ( 2 ):
+            cnt += 6;
+            break;
+        case ( 3 ):
+            cnt += 6;
+            break;
+        case ( 4 ):
+            cnt += 5;
+            break;
+        case ( 5 ):
+            cnt += 5;
+            break;
+        case ( 8 ):
+            cnt += 6;
+            break;
+        default:
+            cnt += ( DIGGITS[ x / 10 ] + 2 );
+            break;
+        }
+        x %= 10;
+    }
+    if ( x >= 10 )
+    {
+        switch ( x )
+        {
+        case ( 10 ):
+            cnt += 3;
+            break;
+        case ( 11 ):
+            cnt += 6;
+            break;
+        case ( 12 ):
+            cnt += 6;
+            break;
+        case ( 13 ):
+            cnt += 8;
+            break;
+        case ( 15 ):
+            cnt += 7;
+            break;
+        case ( 18 ):
+            cnt += 8;
+            break;
+        default:
+            cnt += ( DIGGITS[ x % 10 ] + 4 );
+            break;
+        }
+    }
+    else
+        cnt += DIGGITS[x];
+    return cnt;
+}
+
+int main ()
+{
+    int sum = 0;
+    for ( int i = 0 ; i <= 1000 ; i++ )
+    {
+        sum += cntLetters( i );
+        //cout << i << "   " << cntLetters( i ) << endl;
+    }
+    cout << sum;
+    return 0;
+}
