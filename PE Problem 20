@@ -1,0 +1,30 @@
+// Find the sum of the digits in the number 100!
+
+
+#include <iostream>
+using namespace std;
+const int MAX = 500;
+int main ()
+{
+    short int num[MAX] = { 0 };
+    num[MAX - 1] = 1;
+    int onMind = 0;
+
+    for ( int multipl = 1 ; multipl <= 100 ; multipl++ )
+        for ( int i = MAX - 1 ; i >= 0 ; --i )
+        {
+            num[i] *= multipl;
+            num[i] += onMind % 10;
+            onMind = onMind > 9 ? onMind / 10 : 0;
+            if ( num[i] > 9 )
+            {
+                onMind += ( num[i] / 10 );
+                num[i] %= 10;
+            }
+        }
+    unsigned sum = 0;
+    for ( int i = 0 ; i < MAX ; i++ )
+        sum += num[i];
+    cout << sum;
+    return 0;
+}
