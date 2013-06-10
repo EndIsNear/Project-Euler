@@ -1,0 +1,24 @@
+//How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+
+
+#include <iostream>
+using namespace std;
+const int MONTHS[] = { 31 , 28 , 31 , 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31 };
+bool isLeap ( int year )
+{
+    return ( ( year % 4 == 0 && year % 100 != 0 ) || ( year % 400 == 0 ) ) ? true : false ;
+}
+int main ()
+{
+    int cnt = 0;
+    int days = 1;
+    for ( int year = 1901 ; year <= 2000 ; year++ )
+        for ( int mnt = 1 ; mnt <=12 ; mnt++ )
+        {
+            days += mnt != 2 ? MONTHS[mnt - 1] : ( isLeap( year ) ? 29 : 28 );
+            if ( days % 7 == 6 )
+                cnt++;
+        }
+    cout << cnt << endl;
+    return 0;
+}
